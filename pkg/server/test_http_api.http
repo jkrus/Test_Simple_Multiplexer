@@ -1,0 +1,9 @@
+GET http://localhost:8080/api/v1/order/?ouid=1
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+%}
+
+###
