@@ -16,7 +16,7 @@ const (
 	AppVerPreRelease = true
 
 	// AppVersion represent the app version
-	AppVersion = "v0.0.1"
+	AppVersion = "v0.0.2"
 
 	// yamlFileName represents yaml config filename.
 	yamlFileName = "config.yaml"
