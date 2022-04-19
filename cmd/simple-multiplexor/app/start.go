@@ -12,6 +12,7 @@ import (
 	"github.com/jkrus/Test_Simple_Multuplexor/internal/config"
 	app_err "github.com/jkrus/Test_Simple_Multuplexor/internal/errors"
 	app "github.com/jkrus/Test_Simple_Multuplexor/internal/handlers/http"
+	"github.com/jkrus/Test_Simple_Multuplexor/internal/services"
 	"github.com/jkrus/Test_Simple_Multuplexor/pkg/server"
 )
 
@@ -42,7 +43,12 @@ func (s startCmd) Run(ctx context.Context, wg *sync.WaitGroup, cfg *config.Confi
 		return app_err.ErrLoadConfig(err)
 	}
 
-	handlers := app.NewHandlers()
+	service, err := services.NewServices(ctx, wg, cfg)
+	if err != nil {
+		return err
+	}
+
+	handlers := app.NewHandlers(service)
 
 	newHTTP := server.NewHTTP(ctx, wg, cfg, handlers)
 

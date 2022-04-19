@@ -3,17 +3,28 @@ package http
 import (
 	"net/http"
 
+	"github.com/jkrus/Test_Simple_Multuplexor/internal/info"
+	"github.com/jkrus/Test_Simple_Multuplexor/internal/services"
 	"github.com/jkrus/Test_Simple_Multuplexor/pkg/server"
+)
+
+const (
+	apiV1 = "/api/v1"
 )
 
 type (
 	handlers struct {
 		r *http.ServeMux
+
+		info *info.Handler
 	}
 )
 
-func NewHandlers() server.Handlers {
-	return &handlers{r: http.NewServeMux()}
+func NewHandlers(service *services.Services) server.Handlers {
+	return &handlers{
+		r:    http.NewServeMux(),
+		info: info.NewHandler(service.Info),
+	}
 }
 
 func (h *handlers) Get() http.Handler {
@@ -23,7 +34,9 @@ func (h *handlers) Get() http.Handler {
 func (h *handlers) Register() {
 	r := http.NewServeMux()
 
-	r.HandleFunc("/api/v1", hello)
+	r.HandleFunc(apiV1, hello)
+
+	h.info.Register(apiV1, r)
 
 	h.r.Handle("/", r)
 
