@@ -33,7 +33,10 @@ func Start(ctx context.Context, args []string, wg *sync.WaitGroup, cfg *config.C
 
 	for _, cmd := range cmds {
 		if cmd.Name() == subcommand {
-			cmd.Init(os.Args[2:])
+			err := cmd.Init(os.Args[2:])
+			if err != nil {
+				return err
+			}
 			return cmd.Run(ctx, wg, cfg)
 		}
 	}
