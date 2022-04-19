@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+    app:
+        image: "mult"
+        networks:
+            default:
+        ports:
+            - "8080:8080"
+        volumes:
+            - /home/jkrus/.config/simple-multiplexer:/root/.config/simple-multiplexer
+        command: ./simple_multiplexor start
+networks:
+    default:
+        driver: bridge
