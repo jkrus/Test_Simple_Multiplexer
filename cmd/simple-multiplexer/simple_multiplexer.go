@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/jkrus/Test_Simple_Multuplexor/cmd/simple-multiplexor/app"
+	"github.com/jkrus/Test_Simple_Multuplexor/cmd/simple-multiplexer/app"
 	"github.com/jkrus/Test_Simple_Multuplexor/internal/config"
 )
 
