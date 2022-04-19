@@ -8,7 +8,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go build ./cmd/simple-multiplexer/simple_multiplexor.go
+RUN go build ./cmd/simple-multiplexer/simple_multiplexer.go
 
 EXPOSE 8080
 
